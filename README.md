@@ -4,10 +4,9 @@ Super-Agent Orchestrator implementation in Python with LangChain + CrewAI.
 
 ## Features
 - **Multi-model router** that chooses a specialist model based on task complexity and intent:
-  - `GPT-4` for low-complexity/general tasks.
-  - `Gemini` for medium-complexity analysis.
-  - `Grok` for real-time/current-events tasks.
-  - `GPT-5` logic specialist for high-complexity reasoning.
+  - **GPT-7** for high-complexity logic/reasoning tasks.
+  - **Gemini 5.3** for understanding and medium/low complexity interpretation.
+  - **Grok** for real-time/current-events tasks.
 - **Long-term memory** with `ChromaDB`.
 - **Google Search tool** via Google Custom Search API.
 - **GitHub file management tools** for reading/updating repository files.
@@ -45,9 +44,8 @@ export GOOGLE_API_KEY=...
 export GROK_API_KEY=...
 
 # Optional model overrides
-export OPENAI_MODEL=gpt-4
-export OPENAI_LOGIC_MODEL=gpt-5
-export GEMINI_MODEL=gemini-1.5-pro
+export OPENAI_LOGIC_MODEL=gpt-7
+export GEMINI_UNDERSTANDING_MODEL=gemini-5.3
 export GROK_MODEL=grok-beta
 
 # Chroma

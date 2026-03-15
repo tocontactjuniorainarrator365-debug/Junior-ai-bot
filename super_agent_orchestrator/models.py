@@ -13,13 +13,6 @@ class ModelRegistry:
     def __init__(self, config: ModelConfig) -> None:
         self.config = config
 
-    def build_openai_generalist(self) -> BaseChatModel:
-        return ChatOpenAI(
-            model=self.config.openai_model,
-            api_key=self.config.openai_api_key,
-            temperature=0.2,
-        )
-
     def build_openai_logic_specialist(self) -> BaseChatModel:
         return ChatOpenAI(
             model=self.config.openai_logic_model,
@@ -27,9 +20,9 @@ class ModelRegistry:
             temperature=0,
         )
 
-    def build_gemini_analyst(self) -> BaseChatModel:
+    def build_gemini_understanding_specialist(self) -> BaseChatModel:
         return ChatGoogleGenerativeAI(
-            model=self.config.gemini_model,
+            model=self.config.gemini_understanding_model,
             google_api_key=self.config.google_api_key,
             temperature=0.2,
         )
@@ -44,8 +37,7 @@ class ModelRegistry:
 
     def build_specialists(self) -> dict[str, BaseChatModel]:
         return {
-            "openai_general": self.build_openai_generalist(),
             "openai_logic": self.build_openai_logic_specialist(),
-            "gemini_analyst": self.build_gemini_analyst(),
+            "gemini_understanding": self.build_gemini_understanding_specialist(),
             "grok_realtime": self.build_grok_realtime(),
         }

@@ -9,27 +9,19 @@ def build_specialist_agents(models: dict[str, BaseChatModel], tools: list[BaseTo
     """Build CrewAI agents mapped to specialist model roles."""
 
     return {
-        "openai_general": Agent(
-            role="GPT-4 Generalist",
-            goal="Handle straightforward instructions quickly and accurately.",
-            backstory="A practical assistant specialized in clear responses and drafting.",
-            llm=models["openai_general"],
-            tools=tools,
-            verbose=True,
-        ),
         "openai_logic": Agent(
-            role="GPT-5 Logic Specialist",
-            goal="Solve high-complexity logic and architecture tasks.",
-            backstory="An expert systems thinker focused on rigorous reasoning.",
+            role="GPT-7 Logic Specialist",
+            goal="Solve high-complexity logic, planning, and architecture tasks.",
+            backstory="An expert systems thinker focused on rigorous, stepwise reasoning.",
             llm=models["openai_logic"],
             tools=tools,
             verbose=True,
         ),
-        "gemini_analyst": Agent(
-            role="Gemini Analyst",
-            goal="Perform structured analysis and synthesise findings.",
-            backstory="A researcher that excels at balancing breadth and depth.",
-            llm=models["gemini_analyst"],
+        "gemini_understanding": Agent(
+            role="Gemini 5.3 Understanding Specialist",
+            goal="Interpret user intent and produce clear, well-structured understanding outputs.",
+            backstory="A semantic analyst that excels at contextual understanding and synthesis.",
+            llm=models["gemini_understanding"],
             tools=tools,
             verbose=True,
         ),

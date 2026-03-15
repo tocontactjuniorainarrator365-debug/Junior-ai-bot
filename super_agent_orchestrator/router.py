@@ -18,18 +18,37 @@ class RouteDecision:
 
 
 class MultiModelRouter:
-    """Routes requests to model specialists by lightweight complexity heuristics."""
+    """Routes tasks to OpenAI GPT-7, Gemini 5.3, or Grok specialists."""
 
-    REALTIME_HINTS = {"latest", "real-time", "current", "news", "today", "now"}
-    CODE_HINTS = {"refactor", "algorithm", "optimize", "architecture", "design"}
+    REALTIME_HINTS = {
+        "latest",
+        "real-time",
+        "current",
+        "news",
+        "today",
+        "now",
+        "live",
+        "breaking",
+        "trend",
+    }
+    HIGH_COMPLEXITY_HINTS = {
+        "prove",
+        "formal",
+        "architecture",
+        "multi-step",
+        "algorithm",
+        "optimize",
+        "trade-off",
+        "deep reasoning",
+    }
 
     def classify_complexity(self, task: str) -> Complexity:
         normalized = task.lower()
         token_count = len(normalized.split())
 
-        if token_count > 80 or any(hint in normalized for hint in self.CODE_HINTS):
+        if token_count > 70 or any(hint in normalized for hint in self.HIGH_COMPLEXITY_HINTS):
             return Complexity.HIGH
-        if token_count > 30:
+        if token_count > 25:
             return Complexity.MEDIUM
         return Complexity.LOW
 
@@ -41,25 +60,18 @@ class MultiModelRouter:
             return RouteDecision(
                 specialist_key="grok_realtime",
                 complexity=complexity,
-                reason="Task asks for up-to-date or real-time information.",
+                reason="Task asks for up-to-date or real-time information, routed to Grok.",
             )
 
         if complexity is Complexity.HIGH:
             return RouteDecision(
                 specialist_key="openai_logic",
                 complexity=complexity,
-                reason="High-complexity reasoning routed to OpenAI logic specialist.",
-            )
-
-        if complexity is Complexity.MEDIUM:
-            return RouteDecision(
-                specialist_key="gemini_analyst",
-                complexity=complexity,
-                reason="Medium-complexity analysis routed to Gemini specialist.",
+                reason="High-complexity logic task routed to GPT-7 logic specialist.",
             )
 
         return RouteDecision(
-            specialist_key="openai_general",
+            specialist_key="gemini_understanding",
             complexity=complexity,
-            reason="Low-complexity task routed to GPT-4 generalist.",
+            reason="Low/medium complexity understanding task routed to Gemini 5.3.",
         )

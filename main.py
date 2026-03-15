@@ -3,7 +3,7 @@ from super_agent_orchestrator import SuperAgentOrchestrator
 
 if __name__ == "__main__":
     orchestrator = SuperAgentOrchestrator()
-    task = "Design a modular CI/CD strategy for a Python monorepo and include rollout safeguards."
+    task = "Design a fault-tolerant multi-agent architecture and justify key trade-offs."
     response = orchestrator.run(task)
 
     print(f"Specialist used: {response.specialist}")
