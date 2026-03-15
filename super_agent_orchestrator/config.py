@@ -11,9 +11,10 @@ class ModelConfig:
     openai_api_key: str | None = os.getenv("OPENAI_API_KEY")
     google_api_key: str | None = os.getenv("GOOGLE_API_KEY")
     grok_api_key: str | None = os.getenv("GROK_API_KEY")
-    openai_model: str = os.getenv("OPENAI_MODEL", "gpt-4")
-    openai_logic_model: str = os.getenv("OPENAI_LOGIC_MODEL", "gpt-5")
-    gemini_model: str = os.getenv("GEMINI_MODEL", "gemini-1.5-pro")
+
+    # Model defaults requested by project brief.
+    openai_logic_model: str = os.getenv("OPENAI_LOGIC_MODEL", "gpt-7")
+    gemini_understanding_model: str = os.getenv("GEMINI_UNDERSTANDING_MODEL", "gemini-5.3")
     grok_model: str = os.getenv("GROK_MODEL", "grok-beta")
 
 
